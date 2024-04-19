@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 
 const bookingSchema = new mongoose.Schema(
   {
-    doctor: {
+    photographer: {
       type: mongoose.Types.ObjectId,
-      ref: "Doctor",
+      ref: "Photographer",
       required: true,
     },
     user: {
