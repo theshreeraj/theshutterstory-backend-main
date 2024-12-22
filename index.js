@@ -1,4 +1,5 @@
 import express from "express";
+import connectDB from "./config/db.js";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
@@ -17,16 +18,8 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-// Connect Database
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URL);
-    console.log("MongoDB database is connected");
-  } catch (err) {
-    console.error("MongoDB database connection failed:", err.message);
-    process.exit(1);
-  }
-};
+// db connection
+connectDB();
 
 // middleware
 app.use(cors());
