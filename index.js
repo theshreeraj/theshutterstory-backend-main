@@ -1,6 +1,5 @@
 import express from "express";
 import connectDB from "./config/db.js";
-import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -17,9 +16,6 @@ const port = process.env.PORT || 8000;
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
-
-// db connection
-connectDB();
 
 // middleware
 app.use(cors());

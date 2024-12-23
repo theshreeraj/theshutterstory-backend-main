@@ -7,32 +7,24 @@ import {
   getPhotographerProfile,
 } from "../Controllers/photographerController.js";
 import { authenticate, restrict } from "../auth/verifyToken.js";
-
 import reviewRouter from "./review.js";
 
 const router = express.Router();
 
-// nested route
-router.use("/:photographerId/reviews", reviewRouter);
-router.get("/:id", getSinglePhotographer);
-router.get("/", getAllPhotographer);
-router.put(
-  "/:id",
-  authenticate,
-  restrict(["photographer"]),
-  updatePhotographer
-);
-router.delete(
-  "/:id",
-  authenticate,
-  restrict(["photographer"]),
-  deletePhotographer
-);
+const photographerAuth = [authenticate, restrict(["photographer"])];
 
-router.get(
-  "/profile/me",
-  authenticate,
-  restrict(["photographer"]),
-  getPhotographerProfile
-);
+// Nested routes
+router.use("/:photographerId/reviews", reviewRouter);
+
+// Routes
+router.route("/").get(getAllPhotographer);
+
+router
+  .route("/:id")
+  .get(getSinglePhotographer) // Get a single photographer by ID
+  .put(photographerAuth, updatePhotographer) // Update photographer details (authentication and restriction required)
+  .delete(photographerAuth, deletePhotographer); // Delete photographer (authentication and restriction required)
+
+router.route("/profile/me").get(photographerAuth, getPhotographerProfile); // Get profile of the authenticated photographer
+
 export default router;
