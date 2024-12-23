@@ -11,7 +11,7 @@ import reviewRoute from "./Routes/review.js";
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 4000;
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
