@@ -10,13 +10,11 @@ const PhotographerSchema = new mongoose.Schema({
   role: {
     type: String,
   },
-
-  // Fields for photographer only
   specialization: { type: String },
   qualifications: {
     type: Array,
   },
-
+  work: [{ type: String }], 
   experiences: {
     type: Array,
   },

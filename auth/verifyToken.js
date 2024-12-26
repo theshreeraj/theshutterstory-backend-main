@@ -6,12 +6,6 @@ export const authenticate = async (req, res, next) => {
   // get token from headers
   const authToken = req.headers.authorization;
 
-  // check token exists or not
-
-  // The important thing to note here is after Bearer there is SPACE through which
-  // I am splitting token and bearer. Usually code formatting libraries may remove the extra space which
-  // can cause unexpected repercursion so always keep a check
-
   if (!authToken || !authToken.startsWith("Bearer ")) {
     return res
       .status(401)
